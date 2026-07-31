@@ -7,7 +7,27 @@
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <div class="dashboard">
+    <!-- Login Gate -->
+    <div id="login-gate" class="login-gate">
+        <div class="login-card">
+            <img src="logo.png" alt="TradeKaro" class="login-logo">
+            <h2>Dashboard Login</h2>
+            <form id="login-form">
+                <div class="login-field">
+                    <label for="login-user">Username</label>
+                    <input type="text" id="login-user" autocomplete="username" required>
+                </div>
+                <div class="login-field">
+                    <label for="login-pass">Password</label>
+                    <input type="password" id="login-pass" autocomplete="current-password" required>
+                </div>
+                <p id="login-error" class="login-error" hidden>Invalid username or password</p>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboard-content" style="display:none;">
         <header class="dash-header">
             <div class="header-left">
                 <img src="logo.png" alt="TradeKaro" class="header-logo">
@@ -123,5 +143,43 @@
     </div>
 
     <script src="dashboard.js"></script>
+    <script>
+    (function() {
+        var token = sessionStorage.getItem('dash_token');
+
+        function showDashboard() {
+            document.getElementById('login-gate').style.display = 'none';
+            document.getElementById('dashboard-content').style.display = 'block';
+        }
+
+        // If we already have a token, verify it
+        if (token) {
+            fetch('/api/auth/verify', { headers: { 'X-Dashboard-Token': token } })
+                .then(function(r) { if (r.ok) showDashboard(); })
+                .catch(function() {});
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var user = document.getElementById('login-user').value;
+            var pass = document.getElementById('login-pass').value;
+            document.getElementById('login-error').hidden = true;
+
+            fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: user, password: pass })
+            }).then(function(r) {
+                if (!r.ok) throw new Error('Unauthorized');
+                return r.json();
+            }).then(function(data) {
+                sessionStorage.setItem('dash_token', data.token);
+                showDashboard();
+            }).catch(function() {
+                document.getElementById('login-error').hidden = false;
+            });
+        });
+    })();
+    </script>
 </body>
 </html>
