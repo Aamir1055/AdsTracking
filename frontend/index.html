@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Bazaar - Join Telegram</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header></header>
+
+        <main>
+            <!-- Marquee -->
+            <div class="scroll-banner">
+                <div class="scroll-text">
+                    <span class="stock-item">HDFC BANK <span class="stock-val">1,780</span> <span class="stock-up">▲ +0.65%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">INFOSYS <span class="stock-val">1,820</span> <span class="stock-up">▲ +0.45%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">ICICI BANK <span class="stock-val">1,248</span> <span class="stock-up">▲ +1.20%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">WIPRO <span class="stock-val">560</span> <span class="stock-down">▼ -0.15%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">BANK NIFTY <span class="stock-val">52,400</span> <span class="stock-up">▲ +0.95%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">SENSEX <span class="stock-val">81,200</span> <span class="stock-up">▲ +1.10%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">HDFC BANK <span class="stock-val">1,780</span> <span class="stock-up">▲ +0.65%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">INFOSYS <span class="stock-val">1,820</span> <span class="stock-up">▲ +0.45%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">ICICI BANK <span class="stock-val">1,248</span> <span class="stock-up">▲ +1.20%</span></span>
+                    <span class="stock-sep">•</span>
+                    <span class="stock-item">WIPRO <span class="stock-val">560</span> <span class="stock-down">▼ -0.15%</span></span>
+                    <span class="stock-sep">•</span>
+                </div>
+            </div>
+
+            <!-- Crypto Ticker Cards -->
+            <div class="crypto-grid">
+                <div class="crypto-card">
+                    <span class="crypto-name">BTC</span>
+                    <span class="crypto-price" id="crypto-btc">$--</span>
+                    <span class="crypto-change" id="crypto-btc-change">-</span>
+                </div>
+                <div class="crypto-card">
+                    <span class="crypto-name">ETH</span>
+                    <span class="crypto-price" id="crypto-eth">$--</span>
+                    <span class="crypto-change" id="crypto-eth-change">-</span>
+                </div>
+                <div class="crypto-card">
+                    <span class="crypto-name">BNB</span>
+                    <span class="crypto-price" id="crypto-bnb">$--</span>
+                    <span class="crypto-change" id="crypto-bnb-change">-</span>
+                </div>
+                <div class="crypto-card">
+                    <span class="crypto-name">SOL</span>
+                    <span class="crypto-price" id="crypto-sol">$--</span>
+                    <span class="crypto-change" id="crypto-sol-change">-</span>
+                </div>
+            </div>
+
+            <!-- Telegram Channel Feed -->
+            <section class="channel-feed" id="channel-feed">
+                <div class="feed-header">
+                    <div class="feed-avatar"><img src="logo.png" alt="TB" class="feed-avatar-img"></div>
+                    <div class="feed-info">
+                        <div class="feed-name">Trade Bazaar Analysis</div>
+                        <div class="feed-status"><span class="live-dot"></span> Live</div>
+                    </div>
+                    <a href="#" class="chat-join-btn" id="chat-join-btn">Join Now</a>
+                </div>
+                <div class="feed-body" id="feed-body">
+                    <div class="chat-loading">Loading signals...</div>
+                </div>
+            </section>
+
+            <!-- Video Previews - Side by Side -->
+            <div class="video-section">
+                <div class="video-container" id="video-container">
+                    <div class="video-wrapper">
+                        <video autoplay muted loop playsinline class="ads-video" id="ads-video">
+                            <source src="AdsReel.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-mute-btn" id="mute-btn">
+                            <svg id="mute-icon" viewBox="0 0 24 24" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                            <svg id="unmute-icon" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-container">
+                    <div class="video-wrapper">
+                        <video autoplay muted loop playsinline class="ads-video" id="ads-video-2">
+                            <source src="AdsReel1.mp4" type="video/mp4">
+                        </video>
+                        <div class="video-mute-btn" id="mute-btn-2">
+                            <svg id="mute-icon-2" viewBox="0 0 24 24" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                            <svg id="unmute-icon-2" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Banner -->
+            <section class="stats-banner">
+                <div class="stat-item">
+                    <span class="stat-value">50K+</span>
+                    <span class="stat-label">Active Traders</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">4.9★</span>
+                    <span class="stat-label">Community Rating</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">2 Min</span>
+                    <span class="stat-label">To Get Started</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">24/7</span>
+                    <span class="stat-label">Live Signals</span>
+                </div>
+            </section>
+
+            <!-- Why TradeBazaar -->
+            <section class="why-section">
+                <h3 class="section-title">Why TradeBazaar?</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6366f1" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+                        <div>
+                            <strong>Live Signals</strong>
+                            <p>Real-time buy/sell alerts straight to Telegram</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+                        <div>
+                            <strong>Expert Mentorship</strong>
+                            <p>Learn from professional traders with 10+ years experience</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+                        <div>
+                            <strong>Instant Alerts</strong>
+                            <p>Never miss a trade — alerts delivered in under 1 second</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                        <div>
+                            <strong>Risk Managed</strong>
+                            <p>Every signal includes stop-loss and target levels</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What Traders Say -->
+            <section class="testimonials-section">
+                <h3 class="section-title">What Traders Say</h3>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Best trading signals I've used. Made consistent profits every week. Life changing!"</p>
+                        <div class="testimonial-author">
+                            <span class="author-avatar" style="background:#8FD102;">RV</span>
+                            <div>
+                                <strong>Rajesh V.</strong>
+                                <span>Day Trader, Mumbai</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Started with ₹5,000. The signals and mentorship helped me grow 3x in 60 days!"</p>
+                        <div class="testimonial-author">
+                            <span class="author-avatar" style="background:#8FD102;">PS</span>
+                            <div>
+                                <strong>Priya S.</strong>
+                                <span>Part-time Trader, Bangalore</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Crystal clear entry/exit points. I've tried 5 channels — this is the only one worth it."</p>
+                        <div class="testimonial-author">
+                            <span class="author-avatar" style="background:#8FD102;">AK</span>
+                            <div>
+                                <strong>Amit K.</strong>
+                                <span>Investor, Delhi</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Second Join Button - removed from flow, now sticky below -->
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Trade Bazaar. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Sticky Join Button -->
+    <div class="sticky-join">
+        <a href="#" id="telegram-btn" class="btn btn-primary btn-full">
+            Join Our Telegram Channel
+        </a>
+    </div>
+        </footer>
+    </div>
+
+    <script src="tracking.js"></script>
+    <script>
+        // --- Video Mute/Unmute ---
+        (function() {
+            function setupVideo(videoId, btnId, muteIconId, unmuteIconId) {
+                var video = document.getElementById(videoId);
+                var muteBtn = document.getElementById(btnId);
+                var muteIcon = document.getElementById(muteIconId);
+                var unmuteIcon = document.getElementById(unmuteIconId);
+                if (!video || !muteBtn) return;
+                function toggle() {
+                    if (video.muted) { video.muted = false; video.volume = 1; muteIcon.style.display = 'none'; unmuteIcon.style.display = 'block'; }
+                    else { video.muted = true; muteIcon.style.display = 'block'; unmuteIcon.style.display = 'none'; }
+                }
+                muteBtn.addEventListener('click', function(e) { e.stopPropagation(); toggle(); });
+                video.addEventListener('click', toggle);
+            }
+            setupVideo('ads-video', 'mute-btn', 'mute-icon', 'unmute-icon');
+            setupVideo('ads-video-2', 'mute-btn-2', 'mute-icon-2', 'unmute-icon-2');
+        })();
+
+        // --- Wire buttons ---
+        (function() {
+            var TELEGRAM_URL = 'https://t.me/bvlLIuR9HlNiMTI1';
+            var chatJoin = document.getElementById('chat-join-btn');
+            if (chatJoin) {
+                chatJoin.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Track as telegram click
+                    var visitorId = document.cookie.match(/visitor_id=([^;]*)/);
+                    visitorId = visitorId ? decodeURIComponent(visitorId[1]) : 'unknown';
+                    var blob = new Blob([JSON.stringify({
+                        visitorId: visitorId,
+                        eventType: 'telegram_channel_click',
+                        eventData: JSON.stringify({ source: 'join_now_btn' }),
+                        pageUrl: window.location.pathname,
+                        timestamp: new Date().toISOString()
+                    })], { type: 'application/json' });
+                    navigator.sendBeacon('/api/track/event', blob);
+                    setTimeout(function() { window.location.href = TELEGRAM_URL; }, 150);
+                });
+            }
+        })();
+
+        // --- Crypto Prices (poll every 10s, no WebSocket) ---
+        (function() {
+            function fetchPrices() {
+                fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT"]')
+                    .then(function(r) { return r.json(); })
+                    .then(function(data) {
+                        var map = { 'BTCUSDT': 'crypto-btc', 'ETHUSDT': 'crypto-eth', 'BNBUSDT': 'crypto-bnb', 'SOLUSDT': 'crypto-sol' };
+                        data.forEach(function(item) {
+                            var id = map[item.symbol];
+                            if (!id) return;
+                            var price = parseFloat(item.lastPrice);
+                            var change = parseFloat(item.priceChangePercent);
+                            document.getElementById(id).textContent = '$' + price.toLocaleString('en-US', {maximumFractionDigits: 2});
+                            var changeEl = document.getElementById(id + '-change');
+                            changeEl.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
+                            changeEl.className = 'crypto-change ' + (change >= 0 ? 'up' : 'down');
+                        });
+                    }).catch(function(){});
+            }
+            fetchPrices();
+            setInterval(fetchPrices, 5000);
+        })();
+
+        // --- Telegram Channel Feed ---
+        (function() {
+            fetch('/api/channel/messages?count=15')
+                .then(function(r) { return r.json(); })
+                .then(function(msgs) {
+                    var body = document.getElementById('feed-body');
+                    if (!msgs || msgs.length === 0) {
+                        body.innerHTML = '<div class="chat-loading">Signals loading... Join the channel!</div>';
+                        return;
+                    }
+                    msgs.sort(function(a, b) { return a.messageId - b.messageId; });
+                    // Filter out empty messages
+                    msgs = msgs.filter(function(m) { return m.text || m.photoUrl; });
+                    body.innerHTML = msgs.map(function(m) {
+                        var d = new Date(m.date);
+                        var hours = String(d.getHours()).padStart(2, '0');
+                        var mins = String(d.getMinutes()).padStart(2, '0');
+                        var day = String(d.getDate()).padStart(2, '0');
+                        var month = String(d.getMonth() + 1).padStart(2, '0');
+                        var year = String(d.getFullYear()).slice(-2);
+                        var timeStr = day + '/' + month + '/' + year;
+
+                        var content = '';
+                        // Image
+                        if (m.photoUrl && !m.photoUrl.startsWith('video:')) {
+                            content += '<img src="' + m.photoUrl + '" class="feed-img">';
+                        }
+                        // Video
+                        if (m.photoUrl && m.photoUrl.startsWith('video:')) {
+                            var vUrl = m.photoUrl.substring(6);
+                            content += '<div class="feed-video-wrap"><video src="' + vUrl + '" class="feed-video" playsinline muted loop></video><button class="feed-play-btn" data-playing="false">▶</button></div>';
+                        }
+                        // Text
+                        if (m.text) {
+                            content += '<div class="feed-text">' + escapeHtml(m.text) + '</div>';
+                        }
+                        if (!content) content = '<div class="feed-text">[Media]</div>';
+
+                        return '<div class="feed-card">' + content + '<div class="feed-meta"><span class="feed-time">' + timeStr + '</span></div></div>';
+                    }).join('');
+                    body.scrollTop = body.scrollHeight;
+
+                    // Wire video play buttons
+                    body.querySelectorAll('.feed-play-btn').forEach(function(btn) {
+                        btn.addEventListener('click', function() {
+                            var video = btn.closest('.feed-video-wrap').querySelector('video');
+                            if (btn.dataset.playing === 'false') { video.play(); btn.textContent = '⏸'; btn.dataset.playing = 'true'; }
+                            else { video.pause(); btn.textContent = '▶'; btn.dataset.playing = 'false'; }
+                        });
+                    });
+                })
+                .catch(function() {
+                    document.getElementById('feed-body').innerHTML = '<div class="chat-loading">Signals loading... Join the channel!</div>';
+                });
+
+            function escapeHtml(str) { var d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+# Build output
+backend/bin/
+backend/obj/
+
+# IDE / editor
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Kiro workspace
+.kiro/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Environment / secrets
+*.env
+appsettings.*.json
+!appsettings.json
