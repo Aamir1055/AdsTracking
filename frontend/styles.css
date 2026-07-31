@@ -32,7 +32,7 @@ header {
     overflow: hidden;
     white-space: nowrap;
 }
-.scroll-text { display: inline-block; font-size: 0.72rem; animation: scrollText 25s linear infinite; }
+.scroll-text { display: inline-block; font-size: 0.72rem; animation: scrollText 10s linear infinite; }
 .stock-item { color: #4a5568; font-weight: 500; }
 .stock-val { color: #1a1a1a; font-weight: 700; }
 .stock-up { color: #16a34a; font-weight: 600; }
@@ -74,7 +74,7 @@ header {
     font-weight: 700;
     color: #1a1a1a;
     margin: 0.15rem 0;
-    transition: color 0.3s;
+    transition: color 0.2s, transform 0.2s;
 }
 
 .crypto-change {
@@ -84,6 +84,14 @@ header {
 }
 .crypto-change.up { color: #16a34a; }
 .crypto-change.down { color: #dc2626; }
+
+/* Price flash animation on update */
+@keyframes priceFlash {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.12); color: #b8f742; }
+    100% { transform: scale(1); }
+}
+.price-flash { animation: priceFlash 0.5s ease-out; }
 
 /* Hero */
 .hero { margin: 0.75rem 0; }
@@ -322,6 +330,13 @@ header {
 }
 .video-mute-btn:hover { background: rgba(0,0,0,0.7); }
 .video-mute-btn svg { width: 16px; height: 16px; }
+.video-play-btn {
+    position: absolute; bottom: 8px; left: 8px;
+    width: 28px; height: 28px; background: rgba(0,0,0,0.5);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.video-play-btn:hover { background: rgba(0,0,0,0.7); }
+.video-play-btn svg { width: 14px; height: 14px; }
 
 /* Actions */
 .actions { margin-top: 1.5rem; }

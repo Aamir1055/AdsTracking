@@ -83,6 +83,10 @@
                         <video autoplay muted loop playsinline class="ads-video" id="ads-video">
                             <source src="AdsReel.mp4" type="video/mp4">
                         </video>
+                        <div class="video-play-btn" id="play-btn">
+                            <svg id="pause-icon" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                            <svg id="play-icon" viewBox="0 0 24 24" fill="white" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                        </div>
                         <div class="video-mute-btn" id="mute-btn">
                             <svg id="mute-icon" viewBox="0 0 24 24" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
                             <svg id="unmute-icon" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -94,6 +98,10 @@
                         <video autoplay muted loop playsinline class="ads-video" id="ads-video-2">
                             <source src="AdsReel1.mp4" type="video/mp4">
                         </video>
+                        <div class="video-play-btn" id="play-btn-2">
+                            <svg id="pause-icon-2" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                            <svg id="play-icon-2" viewBox="0 0 24 24" fill="white" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+                        </div>
                         <div class="video-mute-btn" id="mute-btn-2">
                             <svg id="mute-icon-2" viewBox="0 0 24 24" fill="white"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
                             <svg id="unmute-icon-2" viewBox="0 0 24 24" fill="white" style="display:none"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
@@ -215,23 +223,35 @@
 
     <script src="tracking.js"></script>
     <script>
-        // --- Video Mute/Unmute ---
+        // --- Video Mute/Unmute & Play/Pause ---
         (function() {
-            function setupVideo(videoId, btnId, muteIconId, unmuteIconId) {
+            function setupVideo(videoId, btnId, muteIconId, unmuteIconId, playBtnId, pauseIconId, playIconId) {
                 var video = document.getElementById(videoId);
                 var muteBtn = document.getElementById(btnId);
                 var muteIcon = document.getElementById(muteIconId);
                 var unmuteIcon = document.getElementById(unmuteIconId);
-                if (!video || !muteBtn) return;
-                function toggle() {
+                var playBtn = document.getElementById(playBtnId);
+                var pauseIcon = document.getElementById(pauseIconId);
+                var playIcon = document.getElementById(playIconId);
+                if (!video || !muteBtn || !playBtn) return;
+
+                // Mute toggle
+                function toggleMute() {
                     if (video.muted) { video.muted = false; video.volume = 1; muteIcon.style.display = 'none'; unmuteIcon.style.display = 'block'; }
                     else { video.muted = true; muteIcon.style.display = 'block'; unmuteIcon.style.display = 'none'; }
                 }
-                muteBtn.addEventListener('click', function(e) { e.stopPropagation(); toggle(); });
-                video.addEventListener('click', toggle);
+                muteBtn.addEventListener('click', function(e) { e.stopPropagation(); toggleMute(); });
+
+                // Play/Pause toggle
+                function togglePlay() {
+                    if (video.paused) { video.play(); pauseIcon.style.display = 'block'; playIcon.style.display = 'none'; }
+                    else { video.pause(); pauseIcon.style.display = 'none'; playIcon.style.display = 'block'; }
+                }
+                playBtn.addEventListener('click', function(e) { e.stopPropagation(); togglePlay(); });
+                video.addEventListener('click', togglePlay);
             }
-            setupVideo('ads-video', 'mute-btn', 'mute-icon', 'unmute-icon');
-            setupVideo('ads-video-2', 'mute-btn-2', 'mute-icon-2', 'unmute-icon-2');
+            setupVideo('ads-video', 'mute-btn', 'mute-icon', 'unmute-icon', 'play-btn', 'pause-icon', 'play-icon');
+            setupVideo('ads-video-2', 'mute-btn-2', 'mute-icon-2', 'unmute-icon-2', 'play-btn-2', 'pause-icon-2', 'play-icon-2');
         })();
 
         // --- Wire buttons ---
@@ -257,8 +277,9 @@
             }
         })();
 
-        // --- Crypto Prices (poll every 10s, no WebSocket) ---
+        // --- Crypto Prices (poll every 3s for faster updates) ---
         (function() {
+            var prevPrices = {};
             function fetchPrices() {
                 fetch('https://api.binance.com/api/v3/ticker/24hr?symbols=["BTCUSDT","ETHUSDT","BNBUSDT","SOLUSDT"]')
                     .then(function(r) { return r.json(); })
@@ -269,7 +290,17 @@
                             if (!id) return;
                             var price = parseFloat(item.lastPrice);
                             var change = parseFloat(item.priceChangePercent);
-                            document.getElementById(id).textContent = '$' + price.toLocaleString('en-US', {maximumFractionDigits: 2});
+                            var priceEl = document.getElementById(id);
+                            var formatted = '$' + price.toLocaleString('en-US', {maximumFractionDigits: 2});
+
+                            // Flash effect on value change
+                            if (prevPrices[id] && prevPrices[id] !== formatted) {
+                                priceEl.classList.add('price-flash');
+                                setTimeout(function() { priceEl.classList.remove('price-flash'); }, 600);
+                            }
+                            prevPrices[id] = formatted;
+                            priceEl.textContent = formatted;
+
                             var changeEl = document.getElementById(id + '-change');
                             changeEl.textContent = (change >= 0 ? '+' : '') + change.toFixed(2) + '%';
                             changeEl.className = 'crypto-change ' + (change >= 0 ? 'up' : 'down');
@@ -277,7 +308,7 @@
                     }).catch(function(){});
             }
             fetchPrices();
-            setInterval(fetchPrices, 5000);
+            setInterval(fetchPrices, 3000);
         })();
 
         // --- Telegram Channel Feed ---
