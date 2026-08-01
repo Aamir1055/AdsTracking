@@ -328,14 +328,6 @@
                         return m.text || m.photoUrl;
                     });
                     body.innerHTML = msgs.map(function(m) {
-                        var d = new Date(m.date);
-                        var hours = String(d.getHours()).padStart(2, '0');
-                        var mins = String(d.getMinutes()).padStart(2, '0');
-                        var day = String(d.getDate()).padStart(2, '0');
-                        var month = String(d.getMonth() + 1).padStart(2, '0');
-                        var year = String(d.getFullYear()).slice(-2);
-                        var timeStr = day + '/' + month + '/' + year;
-
                         var content = '';
                         // Image
                         if (m.photoUrl) {
@@ -347,7 +339,7 @@
                         }
                         if (!content) content = '<div class="feed-text">[Media]</div>';
 
-                        return '<div class="feed-card">' + content + '<div class="feed-meta"><span class="feed-time">' + timeStr + '</span></div></div>';
+                        return '<div class="feed-card">' + content + '</div>';
                     }).join('');
                     body.scrollTop = body.scrollHeight;
                 })
