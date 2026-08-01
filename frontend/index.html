@@ -322,8 +322,11 @@
                         return;
                     }
                     msgs.sort(function(a, b) { return a.messageId - b.messageId; });
-                    // Filter out empty messages
-                    msgs = msgs.filter(function(m) { return m.text || m.photoUrl; });
+                    // Filter out empty messages and videos/gifs
+                    msgs = msgs.filter(function(m) {
+                        if (m.photoUrl && m.photoUrl.startsWith('video:')) return false;
+                        return m.text || m.photoUrl;
+                    });
                     body.innerHTML = msgs.map(function(m) {
                         var d = new Date(m.date);
                         var hours = String(d.getHours()).padStart(2, '0');
@@ -335,13 +338,8 @@
 
                         var content = '';
                         // Image
-                        if (m.photoUrl && !m.photoUrl.startsWith('video:')) {
+                        if (m.photoUrl) {
                             content += '<img src="' + m.photoUrl + '" class="feed-img">';
-                        }
-                        // Video
-                        if (m.photoUrl && m.photoUrl.startsWith('video:')) {
-                            var vUrl = m.photoUrl.substring(6);
-                            content += '<div class="feed-video-wrap"><video src="' + vUrl + '" class="feed-video" playsinline muted loop></video><button class="feed-play-btn" data-playing="false">▶</button></div>';
                         }
                         // Text
                         if (m.text) {
@@ -352,15 +350,6 @@
                         return '<div class="feed-card">' + content + '<div class="feed-meta"><span class="feed-time">' + timeStr + '</span></div></div>';
                     }).join('');
                     body.scrollTop = body.scrollHeight;
-
-                    // Wire video play buttons
-                    body.querySelectorAll('.feed-play-btn').forEach(function(btn) {
-                        btn.addEventListener('click', function() {
-                            var video = btn.closest('.feed-video-wrap').querySelector('video');
-                            if (btn.dataset.playing === 'false') { video.play(); btn.textContent = '⏸'; btn.dataset.playing = 'true'; }
-                            else { video.pause(); btn.textContent = '▶'; btn.dataset.playing = 'false'; }
-                        });
-                    });
                 })
                 .catch(function() {
                     document.getElementById('feed-body').innerHTML = '<div class="chat-loading">Signals loading... Join the channel!</div>';
