@@ -36,36 +36,10 @@ public class DashboardController : ControllerBase
         var telegramClicks = await connection.ExecuteScalarAsync<int>(
             "SELECT COUNT(*) FROM events WHERE event_type = 'telegram_channel_click'");
 
-        // Get real-time Telegram channel member count (show growth since tracking started)
+        // Get real-time Telegram channel member count (show total count directly)
         var telegramMembersRaw = await _telegramBot.GetChannelMemberCountAsync();
-        int telegramMembers = 0;
-        if (telegramMembersRaw.HasValue)
-        {
-            try
-            {
-                // Check if baseline exists
-                var baselineVal = await connection.ExecuteScalarAsync<string>(
-                    "SELECT event_data FROM events WHERE event_type = 'telegram_member_baseline' AND visitor_id = 'system' LIMIT 1");
-                
-                if (baselineVal == null)
-                {
-                    // First time — store current count as baseline
-                    await connection.ExecuteAsync(
-                        "INSERT INTO events (visitor_id, event_type, event_data, page_url, timestamp_utc) VALUES ('system', 'telegram_member_baseline', @Val, '', UTC_TIMESTAMP(3))",
-                        new { Val = telegramMembersRaw.Value.ToString() });
-                    telegramMembers = 0;
-                }
-                else
-                {
-                    int.TryParse(baselineVal, out var baseCount);
-                    telegramMembers = Math.Max(0, telegramMembersRaw.Value - baseCount);
-                }
-            }
-            catch
-            {
-                telegramMembers = 0;
-            }
-        }
+        int telegramMembers = telegramMembersRaw ?? 0;
+
         var clickToJoinRate = (telegramClicks > 0 && telegramMembers > 0)
             ? Math.Round((double)telegramMembers / telegramClicks * 100, 1)
             : (double?)null;
