@@ -547,32 +547,31 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
 
 /* Social Proof Toast */
 .social-toast {
-    background: #f0fdf4;
-    border: 1px solid #bbf7d0;
-    border-radius: 8px;
-    padding: 0.5rem 0.9rem;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-80px);
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.6rem 1.2rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 0.6rem;
-    max-height: 0;
-    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
     opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease, margin 0.3s ease;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 9999;
+    white-space: nowrap;
 }
 
 .social-toast.show {
-    max-height: 50px;
+    transform: translateX(-50%) translateY(0);
     opacity: 1;
-    padding: 0.5rem 0.9rem;
-    margin-bottom: 0.6rem;
 }
 
 .toast-content {
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     color: #374151;
 }
 
@@ -588,11 +587,13 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
 
 .toast-time {
     color: #9ca3af;
-    font-size: 0.68rem;
+    font-size: 0.7rem;
 }
 
 @media (max-width: 768px) {
-    .social-toast.show {
-        padding: 0.4rem 0.7rem;
+    .social-toast {
+        top: 12px;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.75rem;
     }
 }

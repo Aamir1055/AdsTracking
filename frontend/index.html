@@ -378,13 +378,11 @@
             ];
             var timeAgo = ['just now', '2 min ago', '5 min ago', '1 min ago', '3 min ago'];
 
-            // Insert toast above the channel-feed section
-            var feed = document.getElementById('channel-feed');
             var toast = document.createElement('div');
             toast.id = 'social-toast';
             toast.className = 'social-toast';
             toast.innerHTML = '<div class="toast-content"><strong class="toast-name"></strong> <span class="toast-msg">joined the channel</span> · <span class="toast-time"></span></div>';
-            feed.parentNode.insertBefore(toast, feed);
+            document.body.appendChild(toast);
 
             function showToast() {
                 var name = names[Math.floor(Math.random() * names.length)];
@@ -392,17 +390,14 @@
                 toast.querySelector('.toast-name').textContent = name;
                 toast.querySelector('.toast-time').textContent = time;
                 toast.classList.add('show');
-                setTimeout(function() { toast.classList.remove('show'); }, 4000);
+                setTimeout(function() { toast.classList.remove('show'); }, 3000);
             }
 
-            // First toast after 5s, then every 8-15s
+            // First toast after 3s, then every 5-8s
             setTimeout(function() {
                 showToast();
-                setInterval(function() {
-                    var delay = Math.floor(Math.random() * 7000) + 8000;
-                    setTimeout(showToast, delay);
-                }, 15000);
-            }, 5000);
+                setInterval(showToast, 6000);
+            }, 3000);
         })();
     </script>
 </body>
