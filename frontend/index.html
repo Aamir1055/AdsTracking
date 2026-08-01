@@ -368,6 +368,42 @@
 
             function escapeHtml(str) { var d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
         })();
+
+        // --- Social Proof Toast ---
+        (function() {
+            var names = [
+                'Rahul from Mumbai', 'Sneha from Delhi', 'Vikram from Pune',
+                'Ananya from Bangalore', 'Karan from Hyderabad', 'Pooja from Chennai',
+                'Arjun from Kolkata', 'Meera from Ahmedabad', 'Rohit from Jaipur',
+                'Divya from Lucknow', 'Aditya from Noida', 'Nisha from Indore',
+                'Manish from Chandigarh', 'Riya from Surat', 'Deepak from Nagpur'
+            ];
+            var timeAgo = ['just now', '2 min ago', '5 min ago', '1 min ago', '3 min ago'];
+
+            var toast = document.createElement('div');
+            toast.id = 'social-toast';
+            toast.className = 'social-toast';
+            toast.innerHTML = '<div class="toast-icon">🎉</div><div class="toast-content"><strong class="toast-name"></strong><span class="toast-msg">joined the channel</span><span class="toast-time"></span></div>';
+            document.body.appendChild(toast);
+
+            function showToast() {
+                var name = names[Math.floor(Math.random() * names.length)];
+                var time = timeAgo[Math.floor(Math.random() * timeAgo.length)];
+                toast.querySelector('.toast-name').textContent = name;
+                toast.querySelector('.toast-time').textContent = time;
+                toast.classList.add('show');
+                setTimeout(function() { toast.classList.remove('show'); }, 4000);
+            }
+
+            // First toast after 5s, then every 8-15s
+            setTimeout(function() {
+                showToast();
+                setInterval(function() {
+                    var delay = Math.floor(Math.random() * 7000) + 8000;
+                    setTimeout(showToast, delay);
+                }, 15000);
+            }, 5000);
+        })();
     </script>
 </body>
 </html>
