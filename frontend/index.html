@@ -372,19 +372,19 @@
         // --- Social Proof Toast ---
         (function() {
             var names = [
-                'Rahul from Mumbai', 'Sneha from Delhi', 'Vikram from Pune',
-                'Ananya from Bangalore', 'Karan from Hyderabad', 'Pooja from Chennai',
-                'Arjun from Kolkata', 'Meera from Ahmedabad', 'Rohit from Jaipur',
-                'Divya from Lucknow', 'Aditya from Noida', 'Nisha from Indore',
-                'Manish from Chandigarh', 'Riya from Surat', 'Deepak from Nagpur'
+                'Rahul', 'Sneha', 'Vikram', 'Ananya', 'Karan', 'Pooja',
+                'Arjun', 'Meera', 'Rohit', 'Divya', 'Aditya', 'Nisha',
+                'Manish', 'Riya', 'Deepak', 'Priya', 'Saurabh', 'Neha'
             ];
             var timeAgo = ['just now', '2 min ago', '5 min ago', '1 min ago', '3 min ago'];
 
+            // Insert toast above the channel-feed section
+            var feed = document.getElementById('channel-feed');
             var toast = document.createElement('div');
             toast.id = 'social-toast';
             toast.className = 'social-toast';
-            toast.innerHTML = '<div class="toast-icon">🎉</div><div class="toast-content"><strong class="toast-name"></strong><span class="toast-msg">joined the channel</span><span class="toast-time"></span></div>';
-            document.body.appendChild(toast);
+            toast.innerHTML = '<div class="toast-content"><strong class="toast-name"></strong> <span class="toast-msg">joined the channel</span> · <span class="toast-time"></span></div>';
+            feed.parentNode.insertBefore(toast, feed);
 
             function showToast() {
                 var name = names[Math.floor(Math.random() * names.length)];
