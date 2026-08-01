@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade Bazaar - Join Telegram</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Meta Pixel Code -->
+     <!-- Meta Pixel Code -->
     <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -365,10 +365,12 @@
 
         // --- Social Proof Toast ---
         (function() {
+            var TELEGRAM_URL = 'https://t.me/bvlLIuR9HlNiMTI1';
             var names = [
                 'Rahul', 'Sneha', 'Vikram', 'Ananya', 'Karan', 'Pooja',
                 'Arjun', 'Meera', 'Rohit', 'Divya', 'Aditya', 'Nisha',
-                'Manish', 'Riya', 'Deepak', 'Priya', 'Saurabh', 'Neha'
+                'Manish', 'Riya', 'Deepak', 'Priya', 'Saurabh', 'Neha',
+                'Faraz', 'Ali' , 'Aamir' ,'Ahmed',
             ];
             var timeAgo = ['just now', '2 min ago', '5 min ago', '1 min ago', '3 min ago'];
 
@@ -377,6 +379,33 @@
             toast.className = 'social-toast';
             toast.innerHTML = '<div class="toast-content"><strong class="toast-name"></strong> <span class="toast-msg">joined the channel</span> · <span class="toast-time"></span></div>';
             document.body.appendChild(toast);
+
+            function trackAndRedirect(source) {
+                var visitorId = document.cookie.match(/visitor_id=([^;]*)/);
+                visitorId = visitorId ? decodeURIComponent(visitorId[1]) : 'unknown';
+                var blob = new Blob([JSON.stringify({
+                    visitorId: visitorId,
+                    eventType: 'telegram_channel_click',
+                    eventData: JSON.stringify({ source: source }),
+                    pageUrl: window.location.pathname,
+                    timestamp: new Date().toISOString()
+                })], { type: 'application/json' });
+                navigator.sendBeacon('/api/track/event', blob);
+                setTimeout(function() { window.location.href = TELEGRAM_URL; }, 150);
+            }
+
+            // Click on toast → track and redirect
+            toast.addEventListener('click', function() { trackAndRedirect('toast_popup'); });
+
+            // Make entire telegram feed section clickable
+            var feedSection = document.getElementById('channel-feed');
+            if (feedSection) {
+                feedSection.style.cursor = 'pointer';
+                feedSection.addEventListener('click', function(e) {
+                    if (e.target.closest('.chat-join-btn')) return;
+                    trackAndRedirect('feed_section');
+                });
+            }
 
             function showToast() {
                 var name = names[Math.floor(Math.random() * names.length)];
@@ -387,7 +416,7 @@
                 setTimeout(function() { toast.classList.remove('show'); }, 3000);
             }
 
-            // First toast after 3s, then every 5-8s
+            // First toast after 3s, then every 6s
             setTimeout(function() {
                 showToast();
                 setInterval(showToast, 6000);

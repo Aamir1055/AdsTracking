@@ -552,18 +552,19 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
     top: 20px;
     left: 50%;
     transform: translateX(-50%) translateY(-80px);
-    background: #fff;
-    border: 1px solid #e5e7eb;
+    background: #b8f742;
+    border: none;
     border-radius: 12px;
     padding: 0.85rem 1.6rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.2);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
     z-index: 9999;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .social-toast.show {
@@ -573,21 +574,21 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
 
 .toast-content {
     font-size: 0.95rem;
-    color: #374151;
+    color: #1a1a1a;
 }
 
 .toast-name {
     color: #1a1a1a;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .toast-msg {
-    color: #16a34a;
-    font-weight: 500;
+    color: #1a1a1a;
+    font-weight: 600;
 }
 
 .toast-time {
-    color: #9ca3af;
+    color: #333;
     font-size: 0.8rem;
 }
 
