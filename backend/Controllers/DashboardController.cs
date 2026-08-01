@@ -29,7 +29,7 @@ public class DashboardController : ControllerBase
         var totalPageViews = await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM page_views");
         var totalDownloads = await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM download_events");
         var avgTimeOnPage = await connection.ExecuteScalarAsync<int?>(
-            "SELECT ROUND(AVG(time_on_page_seconds)) FROM page_views WHERE time_on_page_seconds > 0") ?? 0;
+            "SELECT ROUND(AVG(time_on_page_seconds)) FROM page_views WHERE time_on_page_seconds > 0 AND time_on_page_seconds <= 1800") ?? 0;
 
         var ctaClicks = await connection.ExecuteScalarAsync<int>(
             "SELECT COUNT(*) FROM events WHERE event_type = 'cta_click_telegram_page'");
@@ -51,9 +51,14 @@ public class DashboardController : ControllerBase
                 v.utm_medium AS utmMedium,
                 v.utm_campaign AS utmCampaign,
                 COUNT(DISTINCT v.visitor_id) AS visitors,
-                COUNT(DISTINCT e.visitor_id) AS telegramClicks
+                COALESCE(tc.click_count, 0) AS telegramClicks
             FROM visitors v
-            LEFT JOIN events e ON v.visitor_id = e.visitor_id AND e.event_type = 'telegram_channel_click'
+            LEFT JOIN (
+                SELECT e2.visitor_id, COUNT(*) AS click_count
+                FROM events e2
+                WHERE e2.event_type = 'telegram_channel_click'
+                GROUP BY e2.visitor_id
+            ) tc ON v.visitor_id = tc.visitor_id
             GROUP BY v.utm_source, v.utm_medium, v.utm_campaign
             ORDER BY visitors DESC
             LIMIT 20");
