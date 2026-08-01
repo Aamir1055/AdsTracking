@@ -361,17 +361,17 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
     gap: 0;
     margin: 1.5rem auto;
     max-width: 450px;
-    border: 1px solid #e5e7eb;
+    border: none;
     border-radius: 12px;
     overflow: hidden;
-    background: #f3f4f6;
+    background: #b8f742;
 }
 
 .stat-item {
     flex: 1;
     text-align: center;
     padding: 0.75rem 0.5rem;
-    border-right: 1px solid #e5e7eb;
+    border-right: 1px solid rgba(0,0,0,0.1);
 }
 
 .stat-item:last-child { border-right: none; }
@@ -385,7 +385,7 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
 .stat-label {
     display: block;
     font-size: 0.6rem;
-    color: #121314;
+    color: #1a1a1a;
     font-weight: bold;
     margin-top: 0.15rem;
 }
