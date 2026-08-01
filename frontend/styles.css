@@ -380,7 +380,7 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
     display: block;
     font-size: 1rem;
     font-weight: 700;
-    color: #b8f742;
+    color: #1a1a1a;
 }
 .stat-label {
     display: block;
@@ -505,10 +505,11 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
 
 /* Mobile */
 @media (max-width: 480px) {
-    .container { padding: 0.75rem 1rem 5rem; }
-    header { margin-bottom: 0.3rem; }
+    .container { padding: 0 1rem 5rem; }
+    header { margin-bottom: 0; }
     .logo { height: 28px; }
-    .crypto-grid { grid-template-columns: repeat(2, 1fr); gap: 0.4rem; }
+    .crypto-grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+    .crypto-card:nth-child(4) { display: none; }
     .crypto-price { font-size: 0.82rem; }
     .hero h2 { font-size: 1.1rem; }
     .chat-preview { max-width: 100%; }
