@@ -232,7 +232,7 @@ header {
 .chat-join-btn:hover { background: #a3e030; }
 
 .feed-body {
-    height: 500px;
+    height: 1000px;
     overflow-y: auto;
     padding: 0.75rem;
     background: #fff;
@@ -553,8 +553,8 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
     transform: translateX(-50%) translateY(-80px);
     background: #fff;
     border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    padding: 0.85rem 1.6rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -571,7 +571,7 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
 }
 
 .toast-content {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: #374151;
 }
 
@@ -587,13 +587,15 @@ footer { margin-top: 2rem; color: #9ca3af; font-size: 0.72rem; }
 
 .toast-time {
     color: #9ca3af;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 @media (max-width: 768px) {
     .social-toast {
         top: 12px;
-        padding: 0.5rem 0.9rem;
-        font-size: 0.75rem;
+        padding: 0.7rem 1.2rem;
+    }
+    .toast-content {
+        font-size: 0.85rem;
     }
 }
