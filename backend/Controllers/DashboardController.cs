@@ -34,7 +34,7 @@ public class DashboardController : ControllerBase
         var ctaClicks = await connection.ExecuteScalarAsync<int>(
             "SELECT COUNT(*) FROM events WHERE event_type = 'cta_click_telegram_page'");
         var telegramClicks = await connection.ExecuteScalarAsync<int>(
-            "SELECT COUNT(*) FROM events WHERE event_type = 'telegram_channel_click'");
+            "SELECT COUNT(DISTINCT visitor_id) FROM events WHERE event_type = 'telegram_channel_click'");
 
         // Get real-time Telegram channel member count (show total count directly)
         var telegramMembersRaw = await _telegramBot.GetChannelMemberCountAsync();
@@ -51,14 +51,9 @@ public class DashboardController : ControllerBase
                 v.utm_medium AS utmMedium,
                 v.utm_campaign AS utmCampaign,
                 COUNT(DISTINCT v.visitor_id) AS visitors,
-                COALESCE(tc.click_count, 0) AS telegramClicks
+                COUNT(DISTINCT e.visitor_id) AS telegramClicks
             FROM visitors v
-            LEFT JOIN (
-                SELECT e2.visitor_id, COUNT(*) AS click_count
-                FROM events e2
-                WHERE e2.event_type = 'telegram_channel_click'
-                GROUP BY e2.visitor_id
-            ) tc ON v.visitor_id = tc.visitor_id
+            LEFT JOIN events e ON v.visitor_id = e.visitor_id AND e.event_type = 'telegram_channel_click'
             GROUP BY v.utm_source, v.utm_medium, v.utm_campaign
             ORDER BY visitors DESC
             LIMIT 20");
